@@ -11,7 +11,7 @@ import type { ActionData } from "../@ddu-kinds/make.ts";
 type Params = Record<never, never>;
 
 export class Source extends BaseSource<Params, ActionData> {
-  kind = "make";
+  kind = "extcmd";
 
   gather(args: GatherArguments<Params>): ReadableStream<Item<ActionData>[]> {
     return new ReadableStream({
@@ -33,7 +33,7 @@ export class Source extends BaseSource<Params, ActionData> {
           targets.map((target) => {
             controller.enqueue([{
               word: target,
-              action: { path: dirname(makefilePath) },
+              action: { cmd: ["make", target], cwd: dirname(makefilePath) },
             }]);
           });
         }

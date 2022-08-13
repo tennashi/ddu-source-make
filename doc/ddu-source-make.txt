@@ -9,9 +9,8 @@ CONTENTS                                            *ddu-source-make-contents*
 
 INTRODUCTION                                    |ddu-source-make-introduction|
 INSTALL                                         |ddu-source-make-install|
-EXAMPLES                                        |ddu-source-make-interface|
-PARAMS                                          |ddu-source-make-interface|
-ACTIONS                                         |ddu-source-make-interface|
+EXAMPLES                                        |ddu-source-make-examples|
+PARAMS                                          |ddu-source-make-params|
 
 ==============================================================================
 INTRODUCTION                                    *ddu-source-make-introduction*
@@ -25,31 +24,18 @@ Please install all of the following plugins
 
 https://github.com/vim-denops/denops.vim
 https://github.com/Shougo/ddu.vim
+https://github.com/tennashi/ddu-kind-extcmd
 
 ==============================================================================
 EXAMPLES                                            *ddu-source-make-examples*
 
 >
-	" Set default kind action.
-	call ddu#custom#patch_global({
-	\ 'kindOptions': {
-	\   'make': {
-	\     'defaultAction': 'run',
-	\   },
-	\})
-	
 	" Use make source.
 	call ddu#start({'sources': [{'name': 'make'}]})
 <
 
 ==============================================================================
 PARAMS                                                *ddu-source-make-params*
-
-==============================================================================
-ACTIONS                                              *ddu-source-make-actions*
-
-run
-	Run the selected target
 
 ==============================================================================
 vim:tw=78:ts=8:ft=help:norl:noet:fen:noet:
