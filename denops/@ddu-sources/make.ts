@@ -16,9 +16,16 @@ export class Source extends BaseSource<Params, ActionData> {
   gather(args: GatherArguments<Params>): ReadableStream<Item<ActionData>[]> {
     return new ReadableStream({
       async start(controller) {
-        const makefilePath = ensureString(
-          await fn.findfile(args.denops, "Makefile", ".;"),
-        );
+        const foundMakefile = (await Promise.all([
+          fn.findfile(args.denops, "Makefile", ".;"),
+          fn.findfile(args.denops, "GNUmakefile", ".;"),
+          fn.findfile(args.denops, "makefile", ".;"),
+        ])).find((v) => v !== "");
+        if (!foundMakefile) {
+          console.log("Makefile is not found");
+          return;
+        }
+        const makefilePath = ensureString(foundMakefile);
         const makefile = await Deno.open(makefilePath);
         const lines = makefile.readable
           .pipeThrough(new TextDecoderStream())
